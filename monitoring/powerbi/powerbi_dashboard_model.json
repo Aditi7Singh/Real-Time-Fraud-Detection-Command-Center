@@ -1,0 +1,30 @@
+{
+  "name": "Real-Time Fraud Detection Dashboard",
+  "refreshStrategy": "Import or DirectQuery over Parquet folder",
+  "tables": [
+    {
+      "name": "FraudRateOverTime",
+      "source": "fraud_rate_over_time.parquet",
+      "keys": ["time_bucket", "model_name"],
+      "metrics": ["transactions", "frauds", "predicted_frauds", "fraud_rate", "predicted_fraud_rate", "avg_fraud_probability"]
+    },
+    {
+      "name": "FalsePositiveCostTracker",
+      "source": "false_positive_cost_tracker.parquet",
+      "keys": ["day", "model_name"],
+      "metrics": ["transactions", "false_positives", "false_positive_cost", "false_positive_rate"]
+    },
+    {
+      "name": "ModelDrift",
+      "source": "model_drift.parquet",
+      "keys": ["model_name", "feature"],
+      "metrics": ["baseline_mean", "latest_mean", "mean_shift", "baseline_std", "latest_std", "std_shift", "psi"]
+    },
+    {
+      "name": "PrecisionRecallTrends",
+      "source": "precision_recall_trends.parquet",
+      "keys": ["day", "model_name"],
+      "metrics": ["precision", "recall", "f1", "false_positives", "false_negatives"]
+    }
+  ]
+}

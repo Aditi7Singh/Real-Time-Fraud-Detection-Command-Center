@@ -1,0 +1,53 @@
+project:
+  name: real-time-fraud-detection
+  random_state: 42
+  data_dir: data
+  processed_dir: data/processed
+  models_dir: models
+  artifacts_dir: artifacts
+  mlflow_tracking_uri: sqlite:///mlflow.db
+
+ingestion:
+  source: synthetic
+  synthetic_n_rows: 1000000
+  fraud_rate: 0.0017
+  output_path: data/raw/transactions.csv
+  chunk_size: 100000
+  kaggle_path: data/raw/creditcard.csv
+  file_path: data/raw/custom_transactions.csv
+
+feature_engineering:
+  input_path: data/raw/transactions.csv
+  output_path: data/processed/transactions_features.parquet
+  feature_config_path: artifacts/feature_config.joblib
+  history_path: artifacts/history.parquet
+  parquet_compression: snappy
+
+training:
+  models:
+    - xgboost
+    - lightgbm
+    - isolation_forest
+  test_size: 0.2
+  stratify: true
+  tune: true
+  n_trials: 20
+  smote: true
+  smote_random_state: 42
+  target: is_fraud
+  mlflow_experiment_name: real-time-fraud-detection
+  selection_metric: auc_roc
+
+serving:
+  model_path: models/best_model.joblib
+  feature_config_path: artifacts/feature_config.joblib
+  threshold: 0.5
+  host: 0.0.0.0
+  port: 8000
+  max_history_rows: 250000
+
+monitoring:
+  output_dir: monitoring/powerbi
+  parquet_path: data/processed/transactions_features.parquet
+  predictions_path: artifacts/predictions.parquet
+  false_positive_cost: 25.0

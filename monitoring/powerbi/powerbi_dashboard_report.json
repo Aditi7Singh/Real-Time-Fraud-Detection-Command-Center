@@ -1,0 +1,80 @@
+{
+  "reportName": "Real-Time Fraud Detection Operations",
+  "pages": [
+    {
+      "name": "Fraud Operations",
+      "visuals": [
+        {
+          "type": "LineChart",
+          "title": "Live fraud rate over time",
+          "table": "FraudRateOverTime",
+          "xAxis": "time_bucket",
+          "yAxis": "fraud_rate",
+          "legend": "model_name"
+        },
+        {
+          "type": "LineChart",
+          "title": "Predicted fraud rate over time",
+          "table": "FraudRateOverTime",
+          "xAxis": "time_bucket",
+          "yAxis": "predicted_fraud_rate",
+          "legend": "model_name"
+        },
+        {
+          "type": "Card",
+          "title": "Average fraud probability",
+          "table": "FraudRateOverTime",
+          "metric": "avg_fraud_probability"
+        }
+      ]
+    },
+    {
+      "name": "False Positive Cost",
+      "visuals": [
+        {
+          "type": "ClusteredColumnChart",
+          "title": "False positive cost tracker",
+          "table": "FalsePositiveCostTracker",
+          "xAxis": "day",
+          "yAxis": "false_positive_cost",
+          "legend": "model_name"
+        },
+        {
+          "type": "LineChart",
+          "title": "False positive rate trend",
+          "table": "FalsePositiveCostTracker",
+          "xAxis": "day",
+          "yAxis": "false_positive_rate",
+          "legend": "model_name"
+        }
+      ]
+    },
+    {
+      "name": "Model Drift and Quality",
+      "visuals": [
+        {
+          "type": "Table",
+          "title": "Top feature distribution shifts",
+          "table": "ModelDrift",
+          "columns": ["model_name", "feature", "psi", "mean_shift", "std_shift"]
+        },
+        {
+          "type": "LineChart",
+          "title": "Precision trend",
+          "table": "PrecisionRecallTrends",
+          "xAxis": "day",
+          "yAxis": "precision",
+          "legend": "model_name"
+        },
+        {
+          "type": "LineChart",
+          "title": "Recall trend",
+          "table": "PrecisionRecallTrends",
+          "xAxis": "day",
+          "yAxis": "recall",
+          "legend": "model_name"
+        }
+      ]
+    }
+  ]
+}

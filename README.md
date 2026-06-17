@@ -1,6 +1,8 @@
 # Real-Time Fraud Detection System
 
 End-to-end fraud detection pipeline with synthetic/Kaggle ingestion, 40+ engineered features, SMOTE-balanced supervised training, XGBoost/LightGBM/Isolation Forest modeling, MLflow experiment tracking, FastAPI real-time scoring, Docker deployment, and Power BI monitoring assets.
+<img width="1452" height="813" alt="Screenshot 2026-06-17 at 12 05 06 PM" src="https://github.com/user-attachments/assets/b083483e-314c-43de-9818-c5849a5e0fd4" />
+
 
 ## Stack
 
